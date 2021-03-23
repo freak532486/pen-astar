@@ -1,4 +1,20 @@
 # Alternativrouten durch Penalty-Methode
+
+## Vorwort
+Dieser Code ist Teil meiner (Max Willich) Bachelorarbeit "Effiziente Berechnung von Alternativrouten mit der Penaltymethode und CH-Potentialen". Die Arbeit wird wahrscheinlich
+[hier](https://i11www.iti.kit.edu/teaching/theses/finished#studienbachelorarbeiten) unter *Max Willich, 2021* veröffentlicht. Falls nicht, veröffentliche ich
+meine Arbeit in diesem Repository.
+
+Leider kompiliert der Code gerade **nicht**, da eine Bibliothek des ITI vom Karlsruher Institut für theoretische Informatik fehlt, welche einen binären Heap für
+Dijkstra/A\* bereitstellt. Zugriff auf diese Bibliothek sowie auf Graphdaten im richtigen Format müssen beim KIT angefragt werden. Eventuell implementiere ich
+einen eigenen binären Heap, sodass dieses Repository vollständig ist. Falls ihr die Bibliothek vom KIT erhalten habt, muss sie in den root-Ordner des
+Repositories gelegt werden. Folgende Dateien muss es geben:
+- `./base/id_queue.h`
+- `./base/constants.h`
+- `./base/vector_io.h`
+
+Alle weiteren Header werden nicht benötigt.
+
 ## Beschreibung
 Dieses Programm berechnet Alternativrouten auf stark zusammenhängenden Straßengraphen mithilfe der Penalty-Methode zwischen zwei Knoten *s* und *t*. Es werden Graphen im *DIMACS*-Format benötigt. Ein *DIMACS*-Graph besteht aus drei Vektoren
 
@@ -19,12 +35,15 @@ Weiterhin wird eine *Contraction Hierarchy* benötigt. Diese kann mithilfe von *
 
 Alle anderen Dateien werden ignoriert. Das Programm prüft **nicht** die Korrektheit der Graphen. Je nach Betriebssystem ist Groß- und Kleinschreibung wichtig (auf Windows nicht, auf *nix ja).
 ## Kompilierung
-Das Programm lässt sich mit g++ auf Windows und Linux kompilieren. Es wegen Multithreading mit der gcc-Flag `pthread` kompiliert werden. Weiterhin wird der Optimierungsmodus `O3` für beste Laufzeiten empfohlen. Es werden die freien header-only-Bibliotheken [*cxxopts*](https://github.com/jarro2783/cxxopts) und [*SpatiumLib*](https://github.com/martijnkoopman/SpatiumLib) benötigt. Diese müssen mit `-I [Pfad-Zu-Bibliotheken]` eingebunden werden. Es wird der C++17-Standard benötigt. Unten steht das gesamte Kompilierungskommando. *cxxopts* wird unter MIT-Lizenz genutzt, *SpatiumLib* unter GPL3-Lizenz.
+Das Programm lässt sich mit g++ auf Windows und Linux kompilieren. Es wegen Multithreading mit der gcc-Flag `pthread` kompiliert werden. Weiterhin wird der Optimierungsmodus `O3` für beste Laufzeiten empfohlen. Es werden die freien header-only-Bibliotheken [*cxxopts*](https://github.com/jarro2783/cxxopts) und [*SpatiumLib*](https://github.com/martijnkoopman/SpatiumLib) benötigt. Diese müssen mit `-I [Pfad-Zu-Bibliotheken]` eingebunden werden. Beide sind im Repository schon vorhanden. Es wird der C++17-Standard benötigt. Unten steht das gesamte Kompilierungskommando. *cxxopts* wird unter MIT-Lizenz genutzt, *SpatiumLib* unter GPL3-Lizenz.
 
 `g++ -O3 -I [Pfad-Zu-Bibliotheken] --std=c++17 -pthread main.cpp -o penalty`
 
 Eine Kompilierung mit MSVC ist möglich.
 
+Zwei Makros können beim Kompilieren mithilfe von `-D` definiert werden: `PENALIZE_ALT_GRAPH` und `BREAK_ON_ORIGINAL`. Falls `PENALIZE_ALT_GRAPH` gesetzt ist, wird
+der gesamte Alternativgraph in jeder Iteration bestraft. Falls `BREAK_ON_ORIGINAL` gesetzt ist, dann ist das Abbruchkriterium der Penalty-Methode auf dem Original-Graphen,
+nich dem Bestraften. Wem das alles nichts sagt, sollte sich zuerst die Arbeit durchlesen (siehe oben).
 ## Benutzung
 
 	penalty [MODE] [OPTIONS]
