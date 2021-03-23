@@ -33,7 +33,7 @@ Weiterhin wird eine *Contraction Hierarchy* benötigt. Diese kann mithilfe von *
 - /ch/head
 - /ch/weight
 
-Alle anderen Dateien werden ignoriert. Das Programm prüft **nicht** die Korrektheit der Graphen. Je nach Betriebssystem ist Groß- und Kleinschreibung wichtig (auf Windows nicht, auf *nix ja).
+Alle anderen Dateien werden ignoriert. Das Programm prüft **nicht** die Korrektheit der Graphen. Je nach Betriebssystem ist Groß- und Kleinschreibung wichtig (auf Windows nicht, auf \*nix ja).
 ## Kompilierung
 Das Programm lässt sich mit g++ auf Windows und Linux kompilieren. Es wegen Multithreading mit der gcc-Flag `pthread` kompiliert werden. Weiterhin wird der Optimierungsmodus `O3` für beste Laufzeiten empfohlen. Es werden die freien header-only-Bibliotheken [*cxxopts*](https://github.com/jarro2783/cxxopts) und [*SpatiumLib*](https://github.com/martijnkoopman/SpatiumLib) benötigt. Diese müssen mit `-I [Pfad-Zu-Bibliotheken]` eingebunden werden. Beide sind im Repository schon vorhanden. Es wird der C++17-Standard benötigt. Unten steht das gesamte Kompilierungskommando. *cxxopts* wird unter MIT-Lizenz genutzt, *SpatiumLib* unter GPL3-Lizenz.
 
@@ -55,6 +55,8 @@ Das Programm hat zwei Modi:
 
 Für beide Modi gibt es unterschiedliche Kommandozeilenparameter. Im folgenden sei `N` eine nichtnegative ganze Zahl, `F` eine Kommazahl und `S` eine Zeichenkette:
 
+*Hinweis: Parameter, die ein Pfad zu einem Ordner sind, sollten mit einem `/` enden.*
+
 **generate**
 
 generate-vectors hat wieder zwei Modi: Dijkstra-Rank-Zielknoten und zufällige Knoten. Um Dijkstra-Rank-Zielknoten zu generieren, nutzt man `penalty generate rank [OPTIONS]`. Um zufällige Vektoren zu generieren nutzt man `penalty generate random [OPTIONS]`. Es werden die Vektoren `source` und `target` im Zielordner gespeichert. Für den Dijkstra-Rank-Modus wird zusätzlich der Vektor `rank` gespeichert, der einen Start-Ziel-Paar seinen Rang zuweist.
@@ -67,6 +69,7 @@ generate-vectors hat wieder zwei Modi: Dijkstra-Rank-Zielknoten und zufällige K
 - `--min-rank N`: Minimaler zu generierender Dijkstra-Rank wird auf `N` gesetzt.
 
 **run**
+
 **run** hat keine weiteren Modi. Es wird für `run` mindestens ein Graph, ein Ausgabeordner, ein Quellknoten und ein Zielknoten benötigt. Benutzung: `penalty run [OPTIONS]`.
 
 - `-i S` / `--input S`: Setzt den Pfad zum Graphen auf `S`
